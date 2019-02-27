@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name         TimenoteScript
+// @name         TimenoteUtil
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  try to take over the world!
-// @author       You
+// @author       Snicked
 // @match        https://my.timenote.de/WebApplication/timesheet
 // @grant        none
 // ==/UserScript==
@@ -134,7 +134,7 @@ var createInputField = function() {
 createInputField();
 
 
-//  BAUFIX-1236 - Anpassung E-Mail-Templates      0.25
+//  PROJECTID-1244 - Edited E-Mail-Templates      0.25
 
 })();
 
