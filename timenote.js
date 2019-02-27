@@ -24,6 +24,7 @@ var wait = function(time){
   return promise;
 };
 
+// Mapping for Projects
 var mapping = [
   {
     "key":"BAUFIX-",
