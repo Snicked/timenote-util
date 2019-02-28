@@ -17,6 +17,7 @@ var commentArea= "#MainContent_MainContent_TimeSheetEntryPopupControl_ASPxPopupC
 var ASPxTimeInput = 'MainContent_MainContent_TimeSheetEntryPopupControl_ASPxPopupControlTimeSheetEntry_ASPxCallbackPanel_FormViewTimeSheetEntry_ASPxFormLayoutTimeSheetEntry_ASPxTimeEditDuration';
 var ProjectDropDownField = "#MainContent_MainContent_TimeSheetEntryPopupControl_ASPxPopupControlTimeSheetEntry_ASPxCallbackPanel_FormViewTimeSheetEntry_ASPxFormLayoutTimeSheetEntry_ASPxGridLookupProjects_I";
 var WorkTypeField = "#MainContent_MainContent_TimeSheetEntryPopupControl_ASPxPopupControlTimeSheetEntry_ASPxCallbackPanel_FormViewTimeSheetEntry_ASPxFormLayoutTimeSheetEntry_ASPxComboBoxService_I";
+var ProjectsDropdown = "#MainContent_MainContent_TimeSheetEntryPopupControl_ASPxPopupControlTimeSheetEntry_ASPxCallbackPanel_FormViewTimeSheetEntry_ASPxFormLayoutTimeSheetEntry_ASPxGridLookupProjects_DDD_gv_DXMainTable";
 
 var wait = function(time){
   var promise = $.Deferred();
@@ -26,6 +27,10 @@ var wait = function(time){
 
 // Mapping for Projects
 var mapping = [
+  {
+    "key":"INTERN",
+    "project" : "Internes"
+  },
   {
     "key":"BAUFIX-",
     "project" : "1020"
@@ -73,15 +78,10 @@ var addEntry = function(comment, time) {
   
     whenHidden(timeInputField).then(() => { entryPromise.resolve()})
 
-    jQuery("#MainContent_MainContent_TimeSheetEntryPopupControl_ASPxPopupControlTimeSheetEntry_ASPxCallbackPanel_FormViewTimeSheetEntry_ASPxFormLayoutTimeSheetEntry_ASPxGridLookupProjects_DDD_gv_DXMainTable").find('.dxgv').each((i,v) => {
-      
+    jQuery(ProjectsDropdown).find('.dxgv').each((i,v) => {
       var selectText = jQuery(v).text()
-      console.log(selectText);
       mapping.forEach((map)=>{
-
-        console.log(comment.indexOf(map.key), selectText.indexOf(map.project))
-
-        if(comment.indexOf(map.key) > 1 && selectText.indexOf(map.project)) {
+        if(comment.indexOf(map.key) >= 0 && selectText.indexOf(map.project) >= 0) {
           jQuery(v).click();
         }
       })
@@ -137,5 +137,3 @@ createInputField();
 //  PROJECTID-1244 - Edited E-Mail-Templates      0.25
 
 })();
-
-
