@@ -1,7 +1,8 @@
 # timenote-util
 Timenote Util
 
-Tampermonkey Script to help with timetracking in timenote
+
+Tampermonkey(https://tampermonkey.net/) Script to help with timetracking in timenote
 
 
 [Comment]                     H:MM
