@@ -27,26 +27,12 @@ var wait = function(time){
 
 // Mapping for Projects
 var mapping = [
-  {
-    "key":"INTERN",
-    "project" : "Internes"
-  },
-  {
-    "key":"BAUFIX-",
-    "project" : "1020"
-  },
-  {
-    "key":"REMCS-",
-    "project" : "194370"
-  },
-  {
-    "key":"REMINT-",
-    "project" : "194400ff"
-  },
-  {
-    "key":"AK-",
-    "project" : "194420"
-  }
+  { "key":"INTERN", "project" : "Internes"},
+  { "key":"BAUFIX-", "project" : "1020" },
+  { "key":"REMCS-", "project" : "194370" },
+  { "key":"REMINT-", "project" : "194400ff"},
+  { "key":"AK-", "project" : "194420"},
+  { "key":"Deploy", "project" : "194378"}
 ]
 
 
