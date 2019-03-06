@@ -27,12 +27,26 @@ var wait = function(time){
 
 // Mapping for Projects
 var mapping = [
-  { "key":"INTERN", "project" : "Internes"},
-  { "key":"BAUFIX-", "project" : "1020" },
-  { "key":"REMCS-", "project" : "194370" },
-  { "key":"REMINT-", "project" : "194400ff"},
-  { "key":"AK-", "project" : "194420"},
-  { "key":"Deploy", "project" : "194378"}
+  {
+    "key":"INTERN",
+    "project" : "Internes"
+  },
+  {
+    "key":"BAUFIX-",
+    "project" : "1020"
+  },
+  {
+    "key":"REMCS-",
+    "project" : "194370"
+  },
+  {
+    "key":"REMINT-",
+    "project" : "194400ff"
+  },
+  {
+    "key":"AK-",
+    "project" : "194420"
+  }
 ]
 
 
@@ -57,7 +71,10 @@ var addEntry = function(comment, time) {
   var entryPromise = $.Deferred();
   whenVisible(timeInputField).then(() => {
     var timeArray = time.split(".");
-    var timeString = "0" + timeArray[0] + ":" + (("0." + timeArray[1]) * 60) +" h";
+    var hours = timeArray[0] >= 10 ? timeArray[0] : "0" + timeArray[0];
+    var minutes = minutes == 0 ? "00" : timeArray[1] * 60;
+
+    var timeString = hours + ":" + minutes + " h";
     jQuery(timeInputField).focus().val(timeString);
     wait(500).then(() => {ASPx.ELostFocus(ASPxTimeInput)});
     jQuery(commentArea).val(comment);
@@ -85,9 +102,9 @@ var handleBlur = function(e) {
 }
 
 var addEntriesRecursive = function(values, index) {
-  var regex = /(.*)(\d.\d\d$)/;
+  var regex = /(.*)\s+(\d?\d.\d\d\n?$)/;
   var match =regex.exec(values[index]); 
-  if(match[1] && match[2]) {
+  if(match && match[1] && match[2]) {
       console.log(match[1] +" AND " +match[2])
     addEntry(match[1],match[2]).then(() => {
       if(index < values.length) {
