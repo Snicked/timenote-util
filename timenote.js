@@ -27,11 +27,13 @@ var wait = function(time){
 
 // Mapping for Projects
 var mapping = [
+  { "key":"LORD", "project" : "Checkout"},
   { "key":"INTERN", "project" : "Internes"},
   { "key":"BAUFIX-", "project" : "1020" },
   { "key":"REMCS-", "project" : "194370" },
   { "key":"REMINT-", "project" : "194400ff"},
   { "key":"AK-", "project" : "194420"},
+  { "key":"IR-", "project" : "Intranet"},
   { "key":"Deploy", "project" : "194378"}
 ]
 
