@@ -18,6 +18,8 @@ var ASPxTimeInput = 'MainContent_MainContent_TimeSheetEntryPopupControl_ASPxPopu
 var ProjectDropDownField = "#MainContent_MainContent_TimeSheetEntryPopupControl_ASPxPopupControlTimeSheetEntry_ASPxCallbackPanel_FormViewTimeSheetEntry_ASPxFormLayoutTimeSheetEntry_ASPxGridLookupProjects_I";
 var WorkTypeField = "#MainContent_MainContent_TimeSheetEntryPopupControl_ASPxPopupControlTimeSheetEntry_ASPxCallbackPanel_FormViewTimeSheetEntry_ASPxFormLayoutTimeSheetEntry_ASPxComboBoxService_I";
 var ProjectsDropdown = "#MainContent_MainContent_TimeSheetEntryPopupControl_ASPxPopupControlTimeSheetEntry_ASPxCallbackPanel_FormViewTimeSheetEntry_ASPxFormLayoutTimeSheetEntry_ASPxGridLookupProjects_DDD_gv_DXMainTable";
+var Headline = "#MainContent_MainContent_TimeSheetEntryPopupControl_ASPxPopupControlTimeSheetEntry_PWH-1T";
+var styles = ".dxeListBox_Metropolis div.dxlbd {    padding-top: 1px;    padding-bottom: 1px;    height: 380px !important;}";
 
 var wait = function(time){
   var promise = $.Deferred();
@@ -40,7 +42,7 @@ var mapping = [
 
 var whenVisible = function(el){
   var promise = jQuery.Deferred();
-  window.setInterval(() => {if(jQuery(el).is(":visible")) {
+  window.setInterval(() => {if(jQuery(el).is(":visible")) {
     window.setTimeout(() => {promise.resolve();},500);
   }}, 100);
   return promise;
@@ -48,7 +50,7 @@ var whenVisible = function(el){
 
 var whenHidden= function(el){
   var promise = $.Deferred();
-  window.setInterval(() => {if(!jQuery(el).is(":visible")) {
+  window.setInterval(() => {if(!jQuery(el).is(":visible")) {
     window.setTimeout(() => {promise.resolve();},500);
   }}, 100);
   return promise;
@@ -61,12 +63,12 @@ var addEntry = function(comment, time) {
     var timeArray = time.split(".");
     var hours = timeArray[0] >= 10 ? timeArray[0] : "0" + timeArray[0];
     var minutes = minutes == 0 ? "00" : timeArray[1] * 60;
-
+    jQuery(Headline).text(comment);
     var timeString = hours + ":" + minutes + " h";
     jQuery(timeInputField).focus().val(timeString);
     wait(500).then(() => {ASPx.ELostFocus(ASPxTimeInput)});
     jQuery(commentArea).val(comment);
-  
+
     whenHidden(timeInputField).then(() => { entryPromise.resolve()})
 
     jQuery(ProjectsDropdown).find('.dxgv').each((i,v) => {
@@ -91,7 +93,7 @@ var handleBlur = function(e) {
 
 var addEntriesRecursive = function(values, index) {
   var regex = /(.*)\s+(\d?\d.\d\d\n?$)/;
-  var match =regex.exec(values[index]); 
+  var match =regex.exec(values[index]);
   if(match && match[1] && match[2]) {
       console.log(match[1] +" AND " +match[2])
     addEntry(match[1],match[2]).then(() => {
@@ -122,8 +124,24 @@ var createInputField = function() {
   $field.on("blur", handleBlur)
 }
 
-createInputField();
+var addStyles = function(){
+    var css = styles,
+    head = document.head || document.getElementsByTagName('head')[0],
+    style = document.createElement('style');
 
+    head.appendChild(style);
+
+    style.type = 'text/css';
+    if (style.styleSheet){
+        // This is required for IE8 and below.
+        style.styleSheet.cssText = css;
+    } else {
+        style.appendChild(document.createTextNode(css));
+    }
+}
+
+createInputField();
+addStyles();
 
 //  PROJECTID-1244 - Edited E-Mail-Templates      0.25
 
