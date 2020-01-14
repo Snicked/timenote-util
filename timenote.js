@@ -39,7 +39,7 @@ var mapping = [
   { "key":"LEAN-", "project" : "LeanLB"},
   { "key":"IR-", "project" : "Intranet"},
   { "key":"Intranet", "project" : "Intranet"},
-  { "key":"REMTG-", "project" : "194383"},
+  { "key":"REMTG-", "project" : "194389"},
   { "key":"Deploy", "project" : "194378"}
 ]
 
