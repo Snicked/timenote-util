@@ -11,14 +11,14 @@
 (function() {
     'use strict';
 
-var timeInputField = "#MainContent_MainContent_TimeSheetEntryPopupControl_ASPxPopupControlTimeSheetEntry_ASPxCallbackPanel_FormViewTimeSheetEntry_ASPxFormLayoutTimeSheetEntry_ASPxTimeEditDuration_I";
+var timeInputField = "[tabindex=1]";
 var addEntryButton = "#MainContent_MainContent_AspxMenuTimeSheetEntries_DXI0_T";
-var commentArea= "#MainContent_MainContent_TimeSheetEntryPopupControl_ASPxPopupControlTimeSheetEntry_ASPxCallbackPanel_FormViewTimeSheetEntry_ASPxFormLayoutTimeSheetEntry_ASPxMemoData_I";
+var commentArea= "[tabindex=8]";
 var ASPxTimeInput = 'MainContent_MainContent_TimeSheetEntryPopupControl_ASPxPopupControlTimeSheetEntry_ASPxCallbackPanel_FormViewTimeSheetEntry_ASPxFormLayoutTimeSheetEntry_ASPxTimeEditDuration';
-var ProjectDropDownField = "#MainContent_MainContent_TimeSheetEntryPopupControl_ASPxPopupControlTimeSheetEntry_ASPxCallbackPanel_FormViewTimeSheetEntry_ASPxFormLayoutTimeSheetEntry_ASPxGridLookupProjects_I";
-var WorkTypeField = "#MainContent_MainContent_TimeSheetEntryPopupControl_ASPxPopupControlTimeSheetEntry_ASPxCallbackPanel_FormViewTimeSheetEntry_ASPxFormLayoutTimeSheetEntry_ASPxComboBoxService_I";
-var ProjectsDropdown = "#MainContent_MainContent_TimeSheetEntryPopupControl_ASPxPopupControlTimeSheetEntry_ASPxCallbackPanel_FormViewTimeSheetEntry_ASPxFormLayoutTimeSheetEntry_ASPxGridLookupProjects_DDD_gv_DXMainTable";
-var Headline = "#MainContent_MainContent_TimeSheetEntryPopupControl_ASPxPopupControlTimeSheetEntry_PWH-1T";
+var ProjectDropDownField = "[id$=ASPxGridLookupProjects_I]";
+var WorkTypeField = "[id$=ASPxFormLayoutTimeSheetEntry_ASPxComboBoxService_I]";
+var ProjectsDropdown = "[id$=ASPxGridLookupProjects_DDD_gv_DXMainTable]";
+var Headline = "[id$=ASPxPopupControlTimeSheetEntry_PWH-1T]";
 var styles = ".dxeListBox_Metropolis div.dxlbd {    padding-top: 1px;    padding-bottom: 1px;    height: 380px !important;}";
 
 var wait = function(time){
