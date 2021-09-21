@@ -4,7 +4,7 @@
 // @version      0.1
 // @description  try to take over the world!
 // @author       You
-// @match        https://octagen.atlassian.net/*
+// @match        https://myJira.atlassian.net/*
 // @grant        none
 // ==/UserScript==
 
