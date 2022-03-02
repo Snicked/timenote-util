@@ -4,28 +4,43 @@
 // @version      0.1
 // @description  try to take over the world!
 // @author       You
-// @match        https://myJira.atlassian.net/*
+// @match        https://*.atlassian.net/*
 // @grant        none
 // ==/UserScript==
 
 (function() {
     'use strict';
 
-  /*
-    Examlple Url:
-    Time is in hours
-    https://myJira.atlassian.net/secure/Dashboard.jspa#book_PROJ-20::1.5;PROJ-1409::0.25;PROJ-4754::0.5;PROJ-1452::0.5;PROJ-4779::3;
-  */
-  
-  
     var hashString = window.location.hash;
-    if(hashString && hashString.indexOf("#book_") == 0) {
 
-        // PROJ-513::2.5;KON%20Deploy%20Orga::2.25;PROJ-3251::2.5;PROJ-1425::0.5;PROJ-4689::0.25;::;::;::;::;
+    if(hashString && hashString.indexOf("#buuk_") == 0) {
         var taskList = hashString.substring(6);
-        /*
-        ["PROJ-513::2.5","KON%20Deploy%20Orga::2.25","PROJ-3251::2.5"]
-        */
+        var splittedList = taskList.split(";")
+        splittedList.forEach(el => {
+           var entry = el.split("::");
+           var ticket = entry[0];
+           var time = entry[1];
+           if(ticket && ticket.match(/\d+$/g)){
+                console.log(ticket, time);
+                var payLoad = {
+                    "timeSpentSeconds" : 3600 * time,
+                };
+                jQuery.ajax({
+                    async: false,
+                    type: "POST",
+                    url: "/rest/api/2/issue/"+ticket+"/worklog",
+                    data: JSON.stringify(payLoad),
+                    success: function(e){console.log(ticket,time);},
+                    contentType: "application/json",
+                    dataType: "application/json"
+                });
+            }
+        });
+        window.close();
+    }
+
+    if(hashString && hashString.indexOf("#book_") == 0) {
+        var taskList = hashString.substring(6);
         var splittedList = taskList.split(";")
         var $container = jQuery("<div id='jira-adder'><h2 style='margin-bottom:10px'>Add To Jira</h2></div>");
         splittedList.forEach(el => {
@@ -72,8 +87,7 @@
              };
 
              if(comment) {
-                var commentData = {"version": 1,"type": "doc","content": [{"type": "paragraph","content": [{"type": "text","text": comment}]}]};
-                payLoad.comment = commentData;
+                payLoad.comment = comment;
              }
 
              jQuery.ajax({
@@ -93,9 +107,6 @@
                window.location.hash="";
              }
          });
-
         jQuery("body").append($container);
     }
-
-
 })();
