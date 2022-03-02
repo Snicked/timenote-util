@@ -20,7 +20,7 @@ var WorkTypeField = "[id$=ASPxFormLayoutTimeSheetEntry_ASPxComboBoxService_I]";
 var ProjectsDropdown = "[id$=ASPxGridLookupProjects_DDD_gv_DXMainTable]";
 var Headline = "[id$=ASPxPopupControlTimeSheetEntry_PWH-1T]";
 var styles = ".dxeListBox_Metropolis div.dxlbd {    padding-top: 1px;    padding-bottom: 1px;    height: 380px !important;}";
-var jiraUrl = "https://octagen.atlassian.net/jira/dashboards/last-visited#buuk_"
+var jiraUrl = "https://YOUR-JIRA-SUBDOMAIN.atlassian.net/jira/dashboards/last-visited#buuk_"
 var ticketRegex = "(^[A-Z]+-\\d+).*"
 
 var wait = function(time){
