@@ -20,6 +20,8 @@ var WorkTypeField = "[id$=ASPxFormLayoutTimeSheetEntry_ASPxComboBoxService_I]";
 var ProjectsDropdown = "[id$=ASPxGridLookupProjects_DDD_gv_DXMainTable]";
 var Headline = "[id$=ASPxPopupControlTimeSheetEntry_PWH-1T]";
 var styles = ".dxeListBox_Metropolis div.dxlbd {    padding-top: 1px;    padding-bottom: 1px;    height: 380px !important;}";
+var jiraUrl = "https://octagen.atlassian.net/jira/dashboards/last-visited#buuk_"
+var ticketRegex = "(^[A-Z]+-\\d+).*"
 
 var wait = function(time){
   var promise = $.Deferred();
@@ -73,8 +75,14 @@ var addEntry = function(comment, time) {
     wait(500).then(() => {ASPx.ELostFocus(ASPxTimeInput)});
     jQuery(commentArea).val(comment);
 
-    whenHidden(timeInputField).then(() => { entryPromise.resolve()})
-
+    var ticketId = getTicketId(comment);
+    whenHidden(timeInputField).then(() => {
+        if(ticketId) {
+          var win = window.open(jiraUrl+ticketId+"::"+time);
+        }
+        window.setTimeout(() => entryPromise.resolve(), 2000);
+    })
+      
     jQuery(ProjectsDropdown).find('.dxgv').each((i,v) => {
       var selectText = jQuery(v).text()
       mapping.forEach((map)=>{
@@ -86,6 +94,11 @@ var addEntry = function(comment, time) {
 
   });
   return entryPromise;
+}
+
+var getTicketId = function(comment) {
+  var match = comment.match(ticketRegex);
+  return match ? match[1] : undefined;
 }
 
 var handleBlur = function(e) {
