@@ -81,16 +81,18 @@ var addEntry = function(comment, time) {
           var win = window.open(jiraUrl+ticketId+"::"+time);
         }
         window.setTimeout(() => entryPromise.resolve(), 2000);
-    })
+    });
       
-    jQuery(ProjectsDropdown).find('.dxgv').each((i,v) => {
-      var selectText = jQuery(v).text()
-      mapping.forEach((map)=>{
-        if(comment.indexOf(map.key) >= 0 && selectText.indexOf(map.project) >= 0) {
-          jQuery(v).click();
-        }
-      })
-    })
+    var found = false;
+    mapping.forEach((map)=>{
+        jQuery(ProjectsDropdown).find('.dxgv').each((i,v) => {
+            var selectText = jQuery(v).text()
+            if(!found && comment.indexOf(map.key) >= 0 && selectText.indexOf(map.project) >= 0) {
+                found=true;
+                jQuery(v).click();
+            }
+          })
+      });
 
   });
   return entryPromise;
