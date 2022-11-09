@@ -31,6 +31,7 @@ var wait = function(time){
 
 // Mapping for Projects
 var mapping = [
+  { "key":"Smartedit", "project" : "Smart"},
   { "key":"LORD", "project" : "Checkout"},
   { "key":"Checkout", "project" : "Checkout"},
   { "key":"INTERN", "project" : "Internes"},
